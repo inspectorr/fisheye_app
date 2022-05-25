@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8765:8765"
+    restart: unless-stopped
+    volumes:
+      - ./static:/app/static
+    depends_on:
+      - db
+  db:
+    image: postgres:13
+    restart: unless-stopped
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - "POSTGRES_HOST_AUTH_METHOD=trust"
+
+volumes:
+  postgres_data:
