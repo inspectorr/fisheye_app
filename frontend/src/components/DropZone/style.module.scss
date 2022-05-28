@@ -1,0 +1,10 @@
+.drop-zone {
+  border: 1px solid lightblue;
+  border-radius: 5px;
+  padding: 0 1rem;
+  &:hover {
+    cursor: pointer;
+    opacity: 0.5;
+    transition: ease-in-out 150ms;
+  }
+}

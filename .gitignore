@@ -1,2 +1,9 @@
 .idea/
+
 venv/
+__pycache__/
+application/local_setting.py
+
+frontend/node_modules/
+static/*
+!static/.gitkeep/

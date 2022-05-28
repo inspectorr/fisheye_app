@@ -1,0 +1,21 @@
+{
+  "status": "done",
+  "assets": {
+    "spa.11749894755aa639a660.entry.js": {
+      "name": "spa.11749894755aa639a660.entry.js",
+      "path": "/Users/r.verkhoturov/Desktop/dev/fisheye_app/static/dist/spa.11749894755aa639a660.entry.js",
+      "publicPath": "/static/dist/spa.11749894755aa639a660.entry.js"
+    },
+    "spa.11749894755aa639a660.entry.js.LICENSE.txt": {
+      "name": "spa.11749894755aa639a660.entry.js.LICENSE.txt",
+      "path": "/Users/r.verkhoturov/Desktop/dev/fisheye_app/static/dist/spa.11749894755aa639a660.entry.js.LICENSE.txt",
+      "publicPath": "/static/dist/spa.11749894755aa639a660.entry.js.LICENSE.txt"
+    }
+  },
+  "chunks": {
+    "spa": [
+      "spa.11749894755aa639a660.entry.js"
+    ]
+  },
+  "publicPath": "/static/dist/"
+}
