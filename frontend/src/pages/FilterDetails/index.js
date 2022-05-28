@@ -10,7 +10,7 @@ import classnames from './style.module.scss';
 
 export function FilterDetails() {
     const { filterId } = useParams();
-    const [filter] = useApi(apiUrls.getFilter(filterId));
+    const [filter, reloadFilter] = useApi(apiUrls.getFilter(filterId));
     const [result, isExecuting, executeFilter, setResultManually] = useRequest({ url: apiUrls.executeFilter(filterId), method: 'post' })
     const [uploadingImage, setUploadingImage] = useState(null);
 
@@ -29,16 +29,26 @@ export function FilterDetails() {
     function onResetClick() {
         setUploadingImage(null);
         setResultManually(null);
+        reloadFilter({
+            ...filter,
+            last_benchmark: result?.benchmark,
+        });
     }
 
-    const resultImageBase64 = result?.image_base64;
 
     const uploadDisabled =  !filter || !uploadingImage || result;
     const resetRendered =  !filter || uploadingImage || result;
 
+    const resultImageBase64 = result?.data?.image_base64;
+    const currentBenchmark = result?.benchmark ?? filter?.last_benchmark;
+    const lastBenchmarkSeconds = currentBenchmark ? `${currentBenchmark.seconds}s` : 'never';
+
     return (
         <div className={ classnames.page }>
             <div>🐟👁FISHEYE👁🐟 "{ filter.name }"</div>
+            <div>
+                <div>Last benchmark: { lastBenchmarkSeconds }</div>
+            </div>
             <div>
                 <DropZone onDrop={ ([file] = []) => setUploadingImage(file) }/>
             </div>

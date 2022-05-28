@@ -5,4 +5,5 @@ __pycache__/
 application/local_setting.py
 
 frontend/node_modules/
-static/dist/
+static/*
+!static/.gitkeep/

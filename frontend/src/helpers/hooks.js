@@ -22,11 +22,20 @@ export function useRequest(params) {
 }
 
 export function useApi(url) {
-    const [result, isLoading, makeRequest] = useRequest({ method: 'get', url });
+    const [result, isLoading, makeRequest, setResult] = useRequest({ method: 'get', url });
 
     useEffect(() => {
         makeRequest();
     }, []);
 
-    return [result, makeRequest];
+    function reload(manual_offline_data) {
+        if (manual_offline_data) {
+            setResult(manual_offline_data);
+            return;
+        }
+
+        return makeRequest();
+    }
+
+    return [result, reload];
 }

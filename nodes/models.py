@@ -1,8 +1,11 @@
 from urllib.parse import urljoin
 
 from django.db import models
+from django.utils import timezone
 
+from application import settings
 from nodes.constants import DEFAULT_REQ_FIELDS, DEFAULT_RES_FIELDS
+from nodes.helpers import validate_uploading_image
 
 
 class Microservice(models.Model):
@@ -54,6 +57,9 @@ class Filter(models.Model):
             'node__microservice'
         ).order_by('index')
 
+    def get_last_benchmark(self):
+        return self.benchmarks.all().last()
+
     def __str__(self):
         return self.name
 
@@ -69,3 +75,25 @@ class FilterNode(models.Model):
 
     class Meta:
         unique_together = ('filter', 'index')
+
+
+class StaticImage(models.Model):
+    image = models.ImageField(upload_to='static/', validators=[validate_uploading_image])
+
+    def get_url(self):
+        return self.image.url
+
+    def get_full_url(self):
+        return urljoin(settings.SITE_URL, self.get_url())
+
+    def __str__(self):
+        return self.get_full_url()
+
+
+class FilterBenchmark(models.Model):
+    filter = models.ForeignKey(Filter, on_delete=models.CASCADE, related_name='benchmarks')
+    ms = models.PositiveBigIntegerField()
+
+    @staticmethod
+    def start():
+        return timezone.now()

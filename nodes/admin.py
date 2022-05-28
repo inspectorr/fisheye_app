@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from nodes.models import Node, Filter, FilterNode, Microservice
+from nodes.models import Node, Filter, FilterNode, Microservice, StaticImage
 
 
 class MicroserviceAdmin(admin.ModelAdmin):
@@ -25,8 +25,13 @@ class FilterNodeAdmin(admin.ModelAdmin):
     list_select_related = ('filter', 'node',)
 
 
+class StaticImageAdmin(admin.ModelAdmin):
+    list_fields = ('image',)
+
+
 admin.site.register(Microservice, MicroserviceAdmin)
 admin.site.register(Node, NodeAdmin)
 admin.site.register(Filter, FilterAdmin)
 admin.site.register(FilterNode, FilterNodeAdmin)
+admin.site.register(StaticImage, StaticImageAdmin)
 

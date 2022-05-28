@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from nodes.models import Filter, FilterNode
+from nodes.models import Filter, FilterNode, FilterBenchmark
 
 
 class UrlSerializer(serializers.ModelSerializer):
@@ -34,7 +34,22 @@ class UrlListSerializer(serializers.ModelSerializer):
         fields = ('urls',)
 
 
+class FilterBenchmarkSerializer(serializers.ModelSerializer):
+    seconds = serializers.SerializerMethodField()
+
+    @staticmethod
+    def get_seconds(obj):
+        return round(obj.ms * 1e-6, ndigits=2)
+
+    class Meta:
+        model = FilterBenchmark
+        fields = ('seconds',)
+
+
 class FilterSerializer(serializers.ModelSerializer):
+    last_benchmark = FilterBenchmarkSerializer(source='get_last_benchmark')
+
     class Meta:
         model = Filter
-        fields = ('name', 'description')
+        fields = ('name', 'description', 'last_benchmark')
+

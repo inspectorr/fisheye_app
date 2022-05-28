@@ -1,20 +1,12 @@
 import json
+import os
 
 import requests
+from django.apps import apps
+from django.core.exceptions import ValidationError
+from django.utils import timezone
 
-
-class NodeRequestException(Exception):
-    def __init__(self, status_code, error_message, node_dict):
-        self.status_code = status_code
-        self.node_dict = node_dict
-        super().__init__(error_message)
-
-    def to_dict(self):
-        return {
-            'url': self.node_dict['url'],
-            'status_code': self.status_code,
-            'error_message': self.args,
-        }
+from nodes.exceptions import NodeRequestException
 
 
 class UrlListRunner:
@@ -52,3 +44,25 @@ class UrlListRunner:
             last_data = self.filter_by(response.json(), res_fields)
 
         return last_data
+
+
+def validate_uploading_image(value):
+    ext = os.path.splitext(value.name)[1]
+    valid_extensions = ['.png', '.jpg', '.jpeg']
+    if not ext.lower() in valid_extensions:
+        raise ValidationError('Unsupported image extension, please upload .png or .jp(e)g')
+
+
+class FilterBenchmarkRunner:
+    def __init__(self, filter_id):
+        self.filter_id = filter_id
+        self.start = timezone.now()
+
+    def end(self):
+        FilterBenchmark = apps.get_model('nodes', 'FilterBenchmark')
+        delta = timezone.now() - self.start
+        benchmark = FilterBenchmark.objects.create(
+            filter_id=self.filter_id,
+            ms=delta.seconds * 1e6 + delta.microseconds,
+        )
+        return benchmark

@@ -10,3 +10,5 @@ DATABASES = {  # remove for production
 
 DEBUG = True  # disable for production
 ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1']  # enter list for production
+
+SITE_URL = 'http://127.0.0.1:8765'  # enter your site url for static files
