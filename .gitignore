@@ -6,4 +6,4 @@ application/local_setting.py
 
 frontend/node_modules/
 static/*
-!static/.gitkeep/
+postgres_data/*

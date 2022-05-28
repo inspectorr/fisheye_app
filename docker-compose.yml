@@ -3,6 +3,7 @@ version: '3.7'
 services:
   app:
     build: .
+    container_name: fisheye_app
     ports:
       - "8765:8765"
     restart: unless-stopped
@@ -12,6 +13,7 @@ services:
       - db
   db:
     image: postgres:13
+    container_name: fisheye_db
     restart: unless-stopped
     volumes:
       - postgres_data:/var/lib/postgresql/data/
