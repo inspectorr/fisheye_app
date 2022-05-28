@@ -9,4 +9,4 @@ DATABASES = {  # remove for production
 
 
 DEBUG = True  # disable for production
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost']  # enter list for production
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1']  # enter list for production

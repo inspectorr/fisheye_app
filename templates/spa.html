@@ -1,0 +1,19 @@
+{% load static %}
+{% load render_bundle from webpack_loader %}
+
+<!DOCTYPE HTML>
+<html lang="en-EN">
+    <head>
+        {% block head %}
+            <title>
+                🐟fisheye👁
+            </title>
+        {% endblock %}
+    </head>
+    <body>
+        {% render_bundle 'spa' %}
+        {% csrf_token %}
+        <div id="root"></div>
+    </body>
+</html>
+
