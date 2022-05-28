@@ -8,16 +8,21 @@ class MicroserviceAdmin(admin.ModelAdmin):
 
 
 class NodeAdmin(admin.ModelAdmin):
-    list_fields = ('base_url', 'name')
+    list_fields = ('name',)
+
+
+class FilterNodeInline(admin.TabularInline):
+    model = FilterNode
 
 
 class FilterAdmin(admin.ModelAdmin):
     list_fields = ('name', 'description')
-    # todo display nodes
+    inlines = [FilterNodeInline]
 
 
 class FilterNodeAdmin(admin.ModelAdmin):
-    list_select_related = ('filter', 'node_value', 'next_filter_node')
+    list_fields = ('index',)
+    list_select_related = ('filter', 'node',)
 
 
 admin.site.register(Microservice, MicroserviceAdmin)
