@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.views.generic import TemplateView
 
 from application import settings
@@ -10,9 +10,11 @@ class SPAView(TemplateView):
 
 
 urlpatterns = [
-    path('', SPAView.as_view()),
     path('admin/', admin.site.urls),
-    path('nodes/', include('nodes.urls')),
+    path('api/', include([
+        path('nodes/', include('nodes.urls')),
+    ])),
+    re_path(r'^', SPAView.as_view()),
 ]
 
 if settings.DEBUG:

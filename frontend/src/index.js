@@ -1,9 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { FilterDetails } from './pages/filter_details';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { FilterDetails } from './pages/FilterDetails';
 
 function App() {
-    return <FilterDetails />;
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path="/filter/:filterId" element={ <FilterDetails /> } />
+            </Routes>
+        </BrowserRouter>
+    );
 }
 
 document.addEventListener('DOMContentLoaded', () => {

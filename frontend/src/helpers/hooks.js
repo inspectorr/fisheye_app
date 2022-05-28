@@ -1,0 +1,32 @@
+import { useEffect, useState } from 'react';
+import request from './request';
+
+export function useRequest(params) {
+    const [result, setResult] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+
+    function makeRequest(data = {}) {
+        const payload = { ...params, ...data };
+        setIsLoading(true);
+        request(payload)
+            .then((result) => {
+                setResult(result.data);
+            })
+            .catch(console.log) // todo error handling
+            .finally(() => {
+                setIsLoading(false);
+            });
+    }
+
+    return [result, isLoading, makeRequest, setResult]
+}
+
+export function useApi(url) {
+    const [result, isLoading, makeRequest] = useRequest({ method: 'get', url });
+
+    useEffect(() => {
+        makeRequest();
+    }, []);
+
+    return [result, makeRequest];
+}

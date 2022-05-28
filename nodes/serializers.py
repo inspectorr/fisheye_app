@@ -32,3 +32,9 @@ class UrlListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Filter
         fields = ('urls',)
+
+
+class FilterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Filter
+        fields = ('name', 'description')

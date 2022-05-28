@@ -14,16 +14,12 @@ const babelLoader = {
     },
 };
 
-console.log('__dirname', __dirname)
-
-
 const commonConfig = (mode) => {
     const dev = mode === 'development';
 
     return {
         entry: {
             spa: path.resolve(__dirname, '../src/index.js'),
-            // spa: '../src/index.js',
         },
         module: {
             rules: [
@@ -41,9 +37,10 @@ const commonConfig = (mode) => {
                             options: {
                                 modules: {
                                     localIdentName: dev ? '[path][name]__[local]' : '[hash:base64]',
+                                    exportLocalsConvention: 'camelCaseOnly',
                                 },
                                 sourceMap: dev,
-                                localsConvention: 'camelCaseOnly',
+                                import: true,
                             },
                         },
                         {

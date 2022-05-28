@@ -5,6 +5,8 @@ const { commonConfig } = require('./common');
 const DEV_HOST = '127.0.0.1';
 const DEV_PORT = 4321;
 
+// TODO work with server in dev mode
+
 module.exports = merge(commonConfig('development'), {
     mode: 'development',
     plugins: [

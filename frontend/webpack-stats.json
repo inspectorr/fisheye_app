@@ -1,21 +1,21 @@
 {
   "status": "done",
   "assets": {
-    "spa.90cf99d1791d1fdb80ef.entry.js": {
-      "name": "spa.90cf99d1791d1fdb80ef.entry.js",
-      "path": "/Users/r.verkhoturov/Desktop/dev/fisheye_app/static/dist/spa.90cf99d1791d1fdb80ef.entry.js",
-      "publicPath": "static/dist/spa.90cf99d1791d1fdb80ef.entry.js"
+    "spa.d93001a64c4fca2c4288.entry.js": {
+      "name": "spa.d93001a64c4fca2c4288.entry.js",
+      "path": "/Users/r.verkhoturov/Desktop/dev/fisheye_app/static/dist/spa.d93001a64c4fca2c4288.entry.js",
+      "publicPath": "/static/dist/spa.d93001a64c4fca2c4288.entry.js"
     },
-    "spa.90cf99d1791d1fdb80ef.entry.js.LICENSE.txt": {
-      "name": "spa.90cf99d1791d1fdb80ef.entry.js.LICENSE.txt",
-      "path": "/Users/r.verkhoturov/Desktop/dev/fisheye_app/static/dist/spa.90cf99d1791d1fdb80ef.entry.js.LICENSE.txt",
-      "publicPath": "static/dist/spa.90cf99d1791d1fdb80ef.entry.js.LICENSE.txt"
+    "spa.d93001a64c4fca2c4288.entry.js.LICENSE.txt": {
+      "name": "spa.d93001a64c4fca2c4288.entry.js.LICENSE.txt",
+      "path": "/Users/r.verkhoturov/Desktop/dev/fisheye_app/static/dist/spa.d93001a64c4fca2c4288.entry.js.LICENSE.txt",
+      "publicPath": "/static/dist/spa.d93001a64c4fca2c4288.entry.js.LICENSE.txt"
     }
   },
   "chunks": {
     "spa": [
-      "spa.90cf99d1791d1fdb80ef.entry.js"
+      "spa.d93001a64c4fca2c4288.entry.js"
     ]
   },
-  "publicPath": "static/dist/"
+  "publicPath": "/static/dist/"
 }

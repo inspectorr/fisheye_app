@@ -13,17 +13,24 @@
     "@babel/preset-env": "^7.18.2",
     "@babel/preset-react": "^7.17.12",
     "babel-loader": "^8.2.5",
+    "css-loader": "^6.7.1",
     "html-webpack-plugin": "^5.5.0",
     "html-webpack-root-plugin": "^0.10.0",
+    "sass-loader": "^13.0.0",
+    "style-loader": "^3.3.1",
     "terser-webpack-plugin": "^5.3.1",
     "webpack": "^5.72.1",
+    "webpack-bundle-tracker": "^1.5.0",
     "webpack-cli": "^4.9.2",
     "webpack-dev-server": "^4.9.0",
-    "webpack-merge": "^5.8.0",
-    "webpack-bundle-tracker": "^1.5.0"
+    "webpack-merge": "^5.8.0"
   },
   "dependencies": {
+    "axios": "^0.27.2",
     "react": "^18.1.0",
-    "react-dom": "^18.1.0"
+    "react-dom": "^18.1.0",
+    "react-dropzone": "^14.2.1",
+    "react-router-dom": "^6.3.0",
+    "sass": "^1.52.1"
   }
 }

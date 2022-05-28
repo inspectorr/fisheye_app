@@ -10,6 +10,6 @@ module.exports = merge(commonConfig('production'), {
         ],
     },
     output: {
-        publicPath: 'static/dist/',
+        publicPath: '/static/dist/',
     },
 });

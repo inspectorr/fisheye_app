@@ -4,7 +4,7 @@ from rest_framework.views import APIView
 
 from nodes.helpers import UrlListRunner, NodeRequestException
 from nodes.models import Filter
-from nodes.serializers import UrlListSerializer
+from nodes.serializers import UrlListSerializer, FilterSerializer
 
 
 class ExecuteFilterView(APIView):
@@ -16,3 +16,9 @@ class ExecuteFilterView(APIView):
             return Response(result)
         except NodeRequestException as e:
             return Response(e.to_dict())
+
+
+class RetrieveFilterView(APIView):
+    def get(self, *args, **kwargs):
+        the_filter = get_object_or_404(Filter, id=kwargs.get('filter_id'))
+        return Response(FilterSerializer(the_filter).data)
