@@ -22,7 +22,11 @@ class ExecuteFilterView(APIView):
             })
         except NodeRequestException as e:
             return Response(e.to_dict())
-        # todo unexpected error
+        except Exception as e:
+            return Response({
+                'error': 'Unexpected error',
+                'details': str(e)
+            })
 
 
 class RetrieveFilterView(APIView):

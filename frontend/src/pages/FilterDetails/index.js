@@ -12,36 +12,51 @@ export function FilterDetails() {
     const { filterId } = useParams();
     const [filter, reloadFilter] = useApi(apiUrls.getFilter(filterId));
     const [result, isExecuting, executeFilter, setResultManually] = useRequest({ url: apiUrls.executeFilter(filterId), method: 'post' })
-    const [uploadingImage, setUploadingImage] = useState(null);
+    const [imageToUpload, setImageToUpload] = useState(null);
 
     if (!filter) {
         return null;
     }
 
-    function onUploadClick() {
-        toBase64(uploadingImage).then(image_base64 => {
+    function reset() {
+        reloadFilter({
+            ...filter,
+            last_benchmark: getCurrentBenchmark(),
+        });
+        setResultManually(null);
+    }
+
+    function getCurrentBenchmark() {
+        return result?.benchmark ?? filter?.last_benchmark;
+    }
+
+    function handleGoClick() {
+        reset();
+        toBase64(imageToUpload).then(image_base64 => {
             executeFilter({
                 data: { image_base64 }
             });
         });
     }
 
-    function onResetClick() {
-        setUploadingImage(null);
-        setResultManually(null);
-        reloadFilter({
-            ...filter,
-            last_benchmark: result?.benchmark,
-        });
+    function handleResetClick() {
+        setImageToUpload(null);
+        reset();
     }
 
+    function handleDrop([file]) {
+        setImageToUpload(file);
+        reset();
+    }
 
-    const uploadDisabled =  !filter || !uploadingImage || result;
-    const resetRendered =  !filter || uploadingImage || result;
+    const goDisabled = !imageToUpload || isExecuting;
+    const resetRendered = imageToUpload || result && !isExecuting;
+    const resetDisabled = isExecuting;
 
     const resultImageBase64 = result?.data?.image_base64;
-    const currentBenchmark = result?.benchmark ?? filter?.last_benchmark;
+    const currentBenchmark = getCurrentBenchmark();
     const lastBenchmarkSeconds = currentBenchmark ? `${currentBenchmark.seconds}s` : 'never';
+    const goButtonText = 'Go!';
 
     return (
         <div className={ classnames.page }>
@@ -50,18 +65,19 @@ export function FilterDetails() {
                 <div>Last benchmark: { lastBenchmarkSeconds }</div>
             </div>
             <div>
-                <DropZone onDrop={ ([file] = []) => setUploadingImage(file) }/>
+                <DropZone onDrop={ handleDrop }/>
             </div>
             <div className={ classnames.buttonsPad }>
                 <button
-                    disabled={ uploadDisabled }
-                    onClick={ onUploadClick }
+                    disabled={ goDisabled }
+                    onClick={ handleGoClick }
                 >
-                    Go!
+                    { goButtonText }
                 </button>
                 { resetRendered && (
                     <button
-                        onClick={ onResetClick }
+                        disabled={ resetDisabled }
+                        onClick={ handleResetClick }
                     >
                         Reset
                     </button>
@@ -70,7 +86,7 @@ export function FilterDetails() {
             </div>
             <div className={ classnames.imagePreviewPad }>
                 <div className={ classnames.imagePreviewContainer }>
-                    <ImagePreview file={ uploadingImage } />
+                    <ImagePreview file={ imageToUpload } />
                 </div>
                 <div className={ classnames.imagePreviewContainer }>
                     <ImagePreview url={ resultImageBase64 } />

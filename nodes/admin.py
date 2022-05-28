@@ -21,8 +21,8 @@ class FilterAdmin(admin.ModelAdmin):
 
 
 class FilterNodeAdmin(admin.ModelAdmin):
-    list_fields = ('index',)
-    list_select_related = ('filter', 'node',)
+    list_fields = ('index', 'enabled')
+    list_select_related = ('filter', 'node')
 
 
 class StaticImageAdmin(admin.ModelAdmin):

@@ -55,7 +55,7 @@ class Filter(models.Model):
         return self.filter_nodes.all().select_related(
             'node',
             'node__microservice'
-        ).order_by('index')
+        ).exclude(enabled=False).order_by('index')
 
     def get_last_benchmark(self):
         return self.benchmarks.all().last()
@@ -69,6 +69,7 @@ class FilterNode(models.Model):
     node = models.ForeignKey(Node, on_delete=models.PROTECT)
     index = models.PositiveIntegerField()
     default_json_params = models.JSONField(default=dict, null=True, blank=True)
+    enabled = models.BooleanField(default=True)
 
     def __str__(self):
         return f'Node of 🐟"{self.filter.name}"🐟: 👁"{self.node.name}"👁 ({self.index + 1})'
