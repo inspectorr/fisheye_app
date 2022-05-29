@@ -2,7 +2,7 @@
 
 venv/
 __pycache__/
-application/local_setting.py
+application/local_settings.py
 
 frontend/node_modules/
 static/*
