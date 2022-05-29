@@ -1,15 +1,22 @@
-FROM node:8.16 as build-deps
-WORKDIR /app/frontend
-COPY frontend/ .
-RUN yarn install
-RUN yarn build
-
 FROM python:3.9
 
 RUN apt-get update
 
+RUN curl https://deb.nodesource.com/setup_14.x | bash
+RUN curl https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN apt-get install -y nodejs
+RUN npm install -g yarn
+
 WORKDIR /app
 COPY . .
+
+WORKDIR /app/frontend
+
+RUN yarn install
+RUN yarn build
+
+WORKDIR /app
 
 ENV PIP_DISABLE_PIP_VERSION_CHECK 1
 ENV PYTHONDONTWRITEBYTECODE 1
