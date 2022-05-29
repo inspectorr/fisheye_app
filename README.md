@@ -13,7 +13,8 @@ cd frontend && yarn install && yarn build
 
 deployment
 ```shell
-cp local_settings.template.py local_settings.py
+cp application/local_settings.template.py application/local_settings.py
+nano application/local_settings.py
 docker-compose up --build
 ```
 logging into app container
