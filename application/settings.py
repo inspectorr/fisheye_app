@@ -135,6 +135,10 @@ STATICFILES_DIRS = [
 
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://fish-eye.ml'
+]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
