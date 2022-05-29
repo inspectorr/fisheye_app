@@ -19,9 +19,6 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_DB=fisheye_db
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=123
       - POSTGRES_HOST_AUTH_METHOD=trust
 
 volumes:
