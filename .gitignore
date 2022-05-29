@@ -5,7 +5,7 @@ __pycache__/
 application/local_settings.py
 
 frontend/node_modules/
-static/*
+static/dist/*
 postgres_data/*
 backup/dump.json
 db.sqlite3
