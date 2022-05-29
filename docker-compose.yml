@@ -9,6 +9,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./static:/app/static
+      - ./backup:/app/backup
     depends_on:
       - db
   db:
@@ -18,7 +19,9 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
-      - "POSTGRES_HOST_AUTH_METHOD=trust"
+      - POSTGRES_DB=fisheye_db
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=123
 
 volumes:
   postgres_data:

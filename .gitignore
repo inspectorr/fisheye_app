@@ -7,3 +7,5 @@ application/local_setting.py
 frontend/node_modules/
 static/*
 postgres_data/*
+backup/dump.json
+db.sqlite3
