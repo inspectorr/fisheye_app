@@ -1,3 +1,5 @@
+import logging
+
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -21,8 +23,10 @@ class ExecuteFilterView(APIView):
                 'benchmark': FilterBenchmarkSerializer(benchmark.end()).data,
             })
         except NodeRequestException as e:
+            logging.exception(e)
             return Response(e.to_dict())
         except Exception as e:
+            logging.exception(e)
             return Response({
                 'error': 'Unexpected error',
                 'details': str(e)
