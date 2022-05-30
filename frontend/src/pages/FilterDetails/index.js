@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import imageCompression from 'browser-image-compression';
 
 import { toBase64 } from '../../helpers/utils';
 import { useApi, useRequest } from '../../helpers/hooks';
@@ -46,8 +47,13 @@ export function FilterDetailsPage() {
     }
 
     function handleDrop([file]) {
-        setImageToUpload(file);
-        reset();
+        imageCompression(file, {
+            maxSizeMB: 1,
+            useWebWorker: true,
+        }).then((compressedFile) => {
+            setImageToUpload(compressedFile);
+            reset();
+        });
     }
 
     const goDisabled = !imageToUpload || isExecuting;
