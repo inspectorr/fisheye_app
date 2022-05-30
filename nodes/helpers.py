@@ -35,7 +35,12 @@ class UrlListRunner:
             data.update(last_data)
 
             payload = self.filter_by(data, req_fields)
-            response = requests.post(url=url, data=json.dumps(payload), headers={'content-type': 'application/json'})
+            response = requests.post(
+                url=url,
+                data=json.dumps(payload),
+                headers={'content-type': 'application/json'},
+                timeout=900
+            )
             json_data = {}
             try:
                 json_data = response.json()
