@@ -1,4 +1,5 @@
 import json
+import logging
 import os
 
 import requests
@@ -35,13 +36,18 @@ class UrlListRunner:
 
             payload = self.filter_by(data, req_fields)
             response = requests.post(url=url, data=json.dumps(payload), headers={'content-type': 'application/json'})
+            json_data = {}
             if response.status_code != 200:
                 error = 'Unknown error'
+                try:
+                    json_data = response.json()
+                except Exception as e:
+                    logging.exception(e)
                 if response.status_code == 400:
-                    error = response.json().get('error')
+                    error = json_data.get('error', 'No error parsed from json data')
                 raise NodeRequestException(response.status_code, error, url_dict)
 
-            last_data = self.filter_by(response.json(), res_fields)
+            last_data = self.filter_by(json_data, res_fields)
 
         return last_data
 
