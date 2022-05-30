@@ -72,7 +72,13 @@ export function FilterDetailsPage() {
                 <div>Using nodes: { usingNodes }</div>
             </div>
             <div>
-                <DropZone onDrop={ handleDrop }/>
+                <DropZone
+                    onDrop={ handleDrop }
+                    accept={ {
+                        'image/png': ['.png'],
+                        'image/jpeg': ['.jpg', '.jpeg'],
+                    } }
+                />
             </div>
             <div className={ classnames.buttonsPad }>
                 <button

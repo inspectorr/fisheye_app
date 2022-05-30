@@ -9,22 +9,23 @@ RUN apt-get install -y nodejs
 RUN npm install -g yarn
 
 WORKDIR /app
-ADD frontend frontend
-
-WORKDIR /app/frontend
-
-RUN yarn install
-RUN yarn build
-
-WORKDIR /app
-
+ADD requirements.txt requirements.txt
+RUN pip install -r requirements.txt
 ENV PIP_DISABLE_PIP_VERSION_CHECK 1
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-ADD requirements.txt requirements.txt
+ADD frontend/package.json frontend/package.json
 
-RUN pip install -r requirements.txt
+WORKDIR /app/frontend
+
+RUN yarn install
+
+ADD frontend .
+
+RUN yarn build
+
+WORKDIR /app
 
 ADD . .
 

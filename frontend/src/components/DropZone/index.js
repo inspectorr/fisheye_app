@@ -3,8 +3,11 @@ import { useDropzone } from 'react-dropzone';
 
 import classnames from './style.module.scss';
 
-export function DropZone({ onDrop }) {
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({onDrop})
+export function DropZone({ onDrop, accept }) {
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+      onDrop,
+      accept
+  })
 
   return (
     <div className={ classnames.dropZone } { ...getRootProps() }>
