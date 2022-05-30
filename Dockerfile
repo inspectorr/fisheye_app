@@ -9,7 +9,7 @@ RUN apt-get install -y nodejs
 RUN npm install -g yarn
 
 WORKDIR /app
-COPY . .
+ADD frontend frontend
 
 WORKDIR /app/frontend
 
@@ -22,7 +22,11 @@ ENV PIP_DISABLE_PIP_VERSION_CHECK 1
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
+ADD requirements.txt requirements.txt
+
 RUN pip install -r requirements.txt
+
+ADD . .
 
 RUN chmod 777 start.sh
 
