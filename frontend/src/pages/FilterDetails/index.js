@@ -49,7 +49,6 @@ export function FilterDetailsPage() {
     function handleDrop([file]) {
         imageCompression(file, {
             maxSizeMB: 1,
-            useWebWorker: true,
         }).then((compressedFile) => {
             setImageToUpload(compressedFile);
             reset();
