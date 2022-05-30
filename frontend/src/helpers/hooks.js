@@ -37,5 +37,5 @@ export function useApi(url) {
         return makeRequest();
     }
 
-    return [result, reload];
+    return [result, isLoading, reload];
 }

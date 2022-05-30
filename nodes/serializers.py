@@ -46,10 +46,19 @@ class FilterBenchmarkSerializer(serializers.ModelSerializer):
         fields = ('seconds',)
 
 
+class FilterNodeSerializer(serializers.ModelSerializer):
+    name = serializers.CharField(source='node.name')
+    description = serializers.CharField(source='node.description')
+
+    class Meta:
+        model = FilterNode
+        fields = ('name', 'description')
+
+
 class FilterSerializer(serializers.ModelSerializer):
     last_benchmark = FilterBenchmarkSerializer(source='get_last_benchmark')
+    nodes = FilterNodeSerializer(source='get_ordered_filter_nodes', many=True)
 
     class Meta:
         model = Filter
-        fields = ('name', 'description', 'last_benchmark')
-
+        fields = ('id', 'name', 'description', 'last_benchmark', 'nodes')

@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { FilterDetails } from './pages/FilterDetails';
+import { FilterListPage } from './pages/FilterList';
+import { FilterDetailsPage } from './pages/FilterDetails';
 
 function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/filter/:filterId" element={ <FilterDetails /> } />
+                <Route path="/" element={ <FilterListPage /> } />
+                <Route path="/filter/:filterId" element={ <FilterDetailsPage /> } />
             </Routes>
         </BrowserRouter>
     );

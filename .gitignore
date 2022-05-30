@@ -5,6 +5,7 @@ __pycache__/
 application/local_settings.py
 
 frontend/node_modules/
+frontend/webpack-stats.json
 static/dist/*
 postgres_data/*
 backup/dump.json

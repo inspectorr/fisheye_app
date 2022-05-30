@@ -6,11 +6,12 @@ import { useApi, useRequest } from '../../helpers/hooks';
 import { apiUrls } from '../../urls';
 import { DropZone } from '../../components/DropZone';
 import { ImagePreview } from '../../components/ImagePreview';
+import { Page } from '../../components/Page';
 import classnames from './style.module.scss';
 
-export function FilterDetails() {
+export function FilterDetailsPage() {
     const { filterId } = useParams();
-    const [filter, reloadFilter] = useApi(apiUrls.getFilter(filterId));
+    const [filter, isFilterLoading, reloadFilter] = useApi(apiUrls.getFilter(filterId));
     const [result, isExecuting, executeFilter, setResultManually] = useRequest({ url: apiUrls.executeFilter(filterId), method: 'post' })
     const [imageToUpload, setImageToUpload] = useState(null);
 
@@ -57,12 +58,14 @@ export function FilterDetails() {
     const currentBenchmark = getCurrentBenchmark();
     const lastBenchmarkSeconds = currentBenchmark ? `${currentBenchmark.seconds}s` : 'never';
     const goButtonText = 'Go!';
+    const usingNodes = filter?.nodes.map(node => node.name).join(', ');
 
     return (
-        <div className={ classnames.page }>
+        <Page>
             <div>🐟👁FISHEYE👁🐟 "{ filter.name }"</div>
             <div>
                 <div>Last benchmark: { lastBenchmarkSeconds }</div>
+                <div>Using nodes: { usingNodes }</div>
             </div>
             <div>
                 <DropZone onDrop={ handleDrop }/>
@@ -92,6 +95,6 @@ export function FilterDetails() {
                     <ImagePreview url={ resultImageBase64 } />
                 </div>
             </div>
-        </div>
+        </Page>
     );
 }
