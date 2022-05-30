@@ -50,6 +50,7 @@ class Node(models.Model):
 class Filter(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
+    enabled = models.BooleanField(default=True)
 
     def get_ordered_filter_nodes(self):
         return self.filter_nodes.all().select_related(

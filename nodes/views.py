@@ -40,5 +40,5 @@ class RetrieveFilterView(APIView):
 
 
 class ListFilterView(ListAPIView):
-    queryset = Filter.objects.all()
+    queryset = Filter.objects.filter(enabled=True)
     serializer_class = FilterSerializer
