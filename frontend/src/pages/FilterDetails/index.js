@@ -75,8 +75,7 @@ export function FilterDetailsPage() {
                 <DropZone
                     onDrop={ handleDrop }
                     accept={ {
-                        'image/png': ['.png'],
-                        'image/jpeg': ['.jpg', '.jpeg'],
+                        'image/*': ['.png', '.jpg', '.jpeg'],
                     } }
                 />
             </div>
