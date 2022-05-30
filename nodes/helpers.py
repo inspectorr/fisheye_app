@@ -37,12 +37,12 @@ class UrlListRunner:
             payload = self.filter_by(data, req_fields)
             response = requests.post(url=url, data=json.dumps(payload), headers={'content-type': 'application/json'})
             json_data = {}
+            try:
+                json_data = response.json()
+            except Exception as e:
+                logging.exception(e)
             if response.status_code != 200:
                 error = 'Unknown error'
-                try:
-                    json_data = response.json()
-                except Exception as e:
-                    logging.exception(e)
                 if response.status_code == 400:
                     error = json_data.get('error', 'No error parsed from json data')
                 raise NodeRequestException(response.status_code, error, url_dict)
