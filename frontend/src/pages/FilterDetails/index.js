@@ -66,8 +66,7 @@ export function FilterDetailsPage() {
     const usingNodes = filter?.nodes.map(node => node.name).join(', ');
 
     return (
-        <Page>
-            <div>🐟👁FISHEYE👁🐟 "{ filter.name }"</div>
+        <Page navigationString={ filter?.name } >
             <div>
                 <div>Last benchmark: { lastBenchmarkSeconds }</div>
                 <div>Using nodes: { usingNodes }</div>

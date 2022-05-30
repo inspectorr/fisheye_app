@@ -5,6 +5,7 @@ const apiUrls = {
 };
 
 const appUrls = {
+    index: '/',
     filterDetails: (filterId) => `/filter/${filterId}`,
 };
 

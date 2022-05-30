@@ -18,6 +18,7 @@ const commonConfig = (mode) => {
     const dev = mode === 'development';
 
     return {
+        watch: true,
         entry: {
             spa: path.resolve(__dirname, '../src/index.js'),
         },
