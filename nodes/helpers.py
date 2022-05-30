@@ -60,15 +60,18 @@ def validate_uploading_image(value):
 
 
 class FilterBenchmarkRunner:
-    def __init__(self, filter_id):
+    def __init__(self, filter_id, request_json=dict):
         self.filter_id = filter_id
         self.start = timezone.now()
+        self.request_json = request_json
 
-    def end(self):
+    def end(self, response_json=dict):
         FilterBenchmark = apps.get_model('nodes', 'FilterBenchmark')
         delta = timezone.now() - self.start
         benchmark = FilterBenchmark.objects.create(
             filter_id=self.filter_id,
             ms=delta.seconds * 1e6 + delta.microseconds,
+            request_json=self.request_json,
+            response_json=response_json,
         )
         return benchmark

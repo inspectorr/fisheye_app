@@ -94,6 +94,12 @@ class StaticImage(models.Model):
 class FilterBenchmark(models.Model):
     filter = models.ForeignKey(Filter, on_delete=models.CASCADE, related_name='benchmarks')
     ms = models.PositiveBigIntegerField()
+    request_json = models.JSONField(default=dict)
+    response_json = models.JSONField(default=dict)
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+
+    def __str__(self):
+        return self.filter.name + ' ' + str(self.created_at)
 
     @staticmethod
     def start():

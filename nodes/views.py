@@ -15,12 +15,12 @@ class ExecuteFilterView(APIView):
         filter_id = kwargs.get('filter_id')
         the_filter = get_object_or_404(Filter, id=filter_id)
         urls = UrlListSerializer(the_filter).data['urls']
-        benchmark = FilterBenchmarkRunner(filter_id)
+        benchmark = FilterBenchmarkRunner(filter_id, request_json=self.request.data)
         try:
             result = UrlListRunner(serialized_urls=urls).run(initial_data=self.request.data)
             return Response({
                 'data': result,
-                'benchmark': FilterBenchmarkSerializer(benchmark.end()).data,
+                'benchmark': FilterBenchmarkSerializer(benchmark.end(response_json=result)).data,
             })
         except NodeRequestException as e:
             logging.exception(e)
