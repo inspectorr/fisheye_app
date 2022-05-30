@@ -4,3 +4,6 @@ venv
 db.sqlite3
 postgres_data/
 frontend/webpack-stats.json
+venv/
+frontend/node_modules/
+static/
