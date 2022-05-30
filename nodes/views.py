@@ -1,6 +1,6 @@
 import logging
 
-from rest_framework.generics import get_object_or_404
+from rest_framework.generics import get_object_or_404, ListAPIView
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -37,3 +37,8 @@ class RetrieveFilterView(APIView):
     def get(self, *args, **kwargs):
         the_filter = get_object_or_404(Filter, id=kwargs.get('filter_id'))
         return Response(FilterSerializer(the_filter).data)
+
+
+class ListFilterView(ListAPIView):
+    queryset = Filter.objects.all()
+    serializer_class = FilterSerializer
