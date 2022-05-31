@@ -1,10 +1,8 @@
-// change the theme
 $theme-colors: (
   "primary": lightblue,
 );
 
-// Import Bootstrap and its default variables
-@import "node_modules/bootstrap/scss/bootstrap";
+@import "node_modules/bootstrap/scss/bootstrap.scss";
 
 a {
     color: unset;

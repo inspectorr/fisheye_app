@@ -15,14 +15,11 @@ ENV PIP_DISABLE_PIP_VERSION_CHECK 1
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-ADD frontend/package.json frontend/package.json
-
 WORKDIR /app/frontend
-
+ADD frontend/package.json package.json
+ADD frontend/yarn.lock yarn.lock
 RUN yarn install
-
 ADD frontend .
-
 RUN yarn build
 
 WORKDIR /app
