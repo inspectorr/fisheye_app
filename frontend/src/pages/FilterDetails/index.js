@@ -8,6 +8,7 @@ import { apiUrls } from '../../urls';
 import { DropZone } from '../../components/DropZone';
 import { ImagePreview } from '../../components/ImagePreview';
 import { Page } from '../../components/Page';
+import { Button } from '../../components/Button';
 import classnames from './style.module.scss';
 
 export function FilterDetailsPage() {
@@ -80,19 +81,19 @@ export function FilterDetailsPage() {
                 />
             </div>
             <div className={ classnames.buttonsPad }>
-                <button
+                <Button
                     disabled={ goDisabled }
                     onClick={ handleGoClick }
                 >
                     { goButtonText }
-                </button>
+                </Button>
                 { resetRendered && (
-                    <button
+                    <Button
                         disabled={ resetDisabled }
                         onClick={ handleResetClick }
                     >
                         Reset
-                    </button>
+                    </Button>
                 )}
                 { isExecuting && 'Executing, please wait...' }
             </div>

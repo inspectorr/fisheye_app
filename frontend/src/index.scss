@@ -1,0 +1,11 @@
+// change the theme
+$theme-colors: (
+  "primary": lightblue,
+);
+
+// Import Bootstrap and its default variables
+@import '~bootstrap/scss/bootstrap.scss';
+
+a {
+    color: unset;
+}

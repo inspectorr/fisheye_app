@@ -30,6 +30,22 @@ const commonConfig = (mode) => {
                     use: [babelLoader],
                 },
                 {
+                    test: /\.css$/,
+                    use: [
+                        'style-loader',
+                        'css-loader',
+                    ],
+                },
+                {
+                    test: /\.scss$/,
+                    exclude: /\.module\.scss$/,
+                    use: [
+                        'style-loader',
+                        'css-loader',
+                        'sass-loader',
+                    ],
+                },
+                {
                     test: /\.module\.scss$/,
                     use: [
                         'style-loader',
