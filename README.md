@@ -36,8 +36,6 @@ import dump
 ```
 configuring telegram bot
 ```shell
-cp telegram_bot/.template.env .env
-nano .env
-touch session.json
-echo "{}" > session.json
+cp telegram_bot/.template.env telegram_bot/.env
+nano telegram_bot/.env
 ```
