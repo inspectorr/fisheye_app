@@ -34,3 +34,8 @@ import dump
 ```shell
 ./manage.py loaddata backup/dump.json
 ```
+configuring telegram bot
+```shell
+cp telegram_bot/.template.env telegram_bot/.env
+nano telegram_bot/.env
+```

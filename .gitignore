@@ -10,3 +10,8 @@ static/dist/*
 postgres_data/*
 backup/dump.json
 db.sqlite3
+
+telegram_bot/.env
+telegram_bot/session.json
+telegram_bot/images_cache/*
+!telegram_bot/images_cache/.gitkeep

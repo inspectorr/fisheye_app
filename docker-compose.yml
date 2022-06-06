@@ -1,6 +1,15 @@
 version: '3.7'
 
 services:
+  bot:
+    build:
+      dockerfile: Dockerfile
+      context: ./telegram_bot
+    restart: unless-stopped
+    volumes:
+      - ./telegram_bot:/bot
+    depends_on:
+      - app
   app:
     build: .
     container_name: fisheye_app
